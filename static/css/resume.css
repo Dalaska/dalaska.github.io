@@ -70,8 +70,8 @@ html p {
     background-image: url(../image/Group.png);
 }
 .peasonal-image {
-    width: 100px;
-    height: 100px;
+    width: 135px;
+    height: 135px;
 }
 .img-header .content {
     font-family: Courier;
@@ -327,8 +327,8 @@ section .title.about-me::before {
     height: 30px;
 }
 .qr-image {
-    width: 80px;
-    height: 80px;
+    width: 110px;
+    height: 110px;
 }
 .contact .qrcode {
     border-right: 1px solid #CDD8E1; 
