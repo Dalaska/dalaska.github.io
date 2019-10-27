@@ -65,9 +65,9 @@ html p {
 }
 .img-header {
     width: 1000px;
-    height: 300px;
-    margin-top: 20px; 
-    background-image: url(../image/Group.png);
+    height: 430px;
+    margin-top: -px; 
+    background-image: url(../image/field.jpg);
 }
 .peasonal-image {
     width: 135px;
