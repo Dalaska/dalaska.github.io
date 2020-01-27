@@ -64,8 +64,8 @@ html p {
     top: 30px;
 }
 .img-header {
-    width: 1000px;
-    height: 430px;
+    width: 800px;
+    height: 200px;
     margin-top: -px; 
     background-image: url(../image/field.jpg);
 }
@@ -149,8 +149,8 @@ section .title {
     text-align: center;
 }
 section .title.work {
-    margin-top: 100px;
-    margin-bottom: 30px;
+    margin-top: 1px;
+    margin-bottom: 1px;
 }
 section .title::after, section .title::before {
     position: absolute;
@@ -190,7 +190,7 @@ section .title.about-me::before {
 }
 
 .project-detail .col-3-abs {
-    margin-top: 50px;
+    margin-top: 0px;
 }
 .project-detail .col-3-abs:not(.endline) {
     margin-right: 20px;
