@@ -69,6 +69,9 @@ ADAS Applications”. Electronic Imaging 2018.17 (2018):
 - mobileye行人检测：Pedestrian Detection for Driving Assistance Systems: Single-frame Classification
 and System Level Performance
 
+### SLAM
+- GraphSLAM: Sebastian Thrun, Michael Montemerlo. "The GraphSLAM Algorithm with Applications to Large-Scale Mapping of Urban Structures"
+
 ### 深度学习
 - resnet: He, Kaiming, et al. "Deep residual learning for image recognition." Proceedings of the IEEE conference on computer vision and pattern recognition. 2016.
 
