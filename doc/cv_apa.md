@@ -7,7 +7,7 @@
 
 ## kernel(核函数)
 核函数的作用相当于一个filter。可以作提取特征用。通过计算核心函数与原图的卷积，提取图像的某些特征。
-![fiter](./img/ADAS/pointcloud.png)
+![fiter](../img/CV/canny.png)
 
 ## 低通滤波
 图片模糊处理
