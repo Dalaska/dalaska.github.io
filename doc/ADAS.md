@@ -23,12 +23,12 @@
 目标级融合，每个传感器先各自处理原始信号生成目标。在目标的基础上进行融合。优点是对控制器的算力和通信传输要求低。缺点是传感器在独立处理信号时会有信息丢失。
 数据级融合，在原始数据级就进行融合优点是信息丢失少，精度高，缺点是对控制器的算力和通信传输要求高。
 在设计架构时需要找到精度和算力分布的平衡点。
-![text](./img/ADAS/pointcloud.png)
+![text](../img/ADAS/pointcloud.png)
 
 一个摄像头和雷达目标级的传感器融合。雷达输出target信号，摄像头为类似mobileye的智能摄像头输出track信号
 架构分为数据有效性验证，时间补偿，雷达聚类，目标匹配，新目标生成，航迹追踪，目标管理等子模块
 下面将对雷达聚类，目标匹配，航迹追踪进行介绍
-![text](./img/ADAS/pointcloud.png)
+![text](../img/ADAS/pointcloud.png)
 
 ## 1.雷达聚类 
 毫米波雷达通过分析雷达反射的回波进行目标的定位测速
@@ -47,7 +47,7 @@ target杂波较多，需要进行目标过滤。
 在距离参数上，除了空间距欧式离外，可用用加权的欧式距离
 雷达只能提供径向距离和速度，不能提供切向值，距离较准，角度不准
 或者采用马氏距离，通过标准差在对距离加权
-![text](./img/ADAS/pointcloud.png)
+![text](../img/ADAS/pointcloud.png)
 
 常用的聚类方法有基于距离eclidean clustering，基于密度dbscan
 在核心的选择上可以反射能量大的点，或者以上次聚类的结果为核心。
@@ -74,7 +74,7 @@ gnn, global nearest neighbor
 贪心算法。
 计算全局的最小值匹配，把匹配后那行和列都删掉。再在剩下的值中找最小值重复上述步骤。知道列表为空或者最小值大于某阈值。
 joint covance用了观测协方差，观测协方差估了个常数，再和fusion obj的协方差一起算出pooled covariance，用pooled covariance 算马氏距离
-![text](./img/ADAS/dbscan.gif)
+![text](../img/ADAS/dbscan.gif)
 
 根据数据的特性，如果匹配基本明确，如果不明确例如在一个门控区域中有多个观测值；或者在共同观测值在多个门控区域
 但是，如果关联不明确，则分配决策变得耦合且难以解决。可以采用mht, multi hypothesis tracking
