@@ -2,57 +2,48 @@
 以车位识别为例介绍CV中经典算法
 
 ## 架构
-架构设计图
-主要分为图像预处理，边沿检测，直线检测，角点识别，及车位拟合
+架构设计图。主要分为图像预处理，边沿检测，直线检测，角点识别，及车位拟合
+![flow](../img/CV/flowchart.png)
 
 ## kernel(核函数)
 核函数的作用相当于一个filter。可以作提取特征用。通过计算核心函数与原图的卷积，提取图像的某些特征。
-![fiter](../img/CV/canny.png)
+![cov](../img/CV/cov.gif)
 
 ## 低通滤波
-图片模糊处理
-gausissan kernel
-![gaus]
+低通滤波图片模糊处理。在边沿检测前先做模糊处理以减少噪声。常用高斯滤波进行模糊处理。高斯滤波的核函数如下：
+![gauss](../img/CV/gaussian.png)
+![blur](../img/CV/blur.png)
 
 ## 高通滤波
-边沿检测
-Gradients
-Gradients are a measure of intensity change in an image, and they generally mark object boundaries and changing area of light and dark. If we think back to treating images as functions, F(x, y), we can think of the gradient as a derivative operation F ’ (x, y). Where the derivative is a measurement of intensity change.
-
-Sobel filters
-The Sobel filter is very commonly used in edge detection and in finding patterns in intensity in an image. Applying a Sobel filter to an image is a way of taking (an approximation) of the derivative of the image in the xx or yy direction. The operators for Sobel_xSobel 
-x
-​	
-  and Sobel_ySobel 
-y
-​	
- , respectively, look like this:
-sobel high pass，
-sobel x, y 
-![sobel]
+高通滤波边沿检测。
+通过梯度来描述图像强度的变化。通常梯度变化大的位置对应图像边沿部分。Sobel滤波用于边沿检测。可以通过核函数的设置检测不同方向的线段。下图sobel_x和sobel_y分别检测横向和纵向的线段。
+![sobel](../img/CV/sobel.png)
+![sobel2](../img/CV/sobel2.png)
  
 ### 边沿检测canny
-调参的含义
-canny double thresholding, eliminate weak edges and nosie 
-isolates edges that are part of an object boundary
-![canny]
+canny通过双阈值法噪音和弱边沿。例如在opencv的Canny函数可设置参数，
+'edges = cv.Canny(img,lower_threshold, upper_threshold)'
+![canny](../img/CV/canny.png)
+
 
 ## 直线检测
-6 hough
-线段检测
-![sobel]
+Hough变换线段检测。平面空间的线在HOG变换后变为hough空间中的点。平面空间的点变为hough空间的线.
+![hough](../img/CV/hough.png)
 
 
 ## 角点检测
-9 hog+svm
-![sobel]
+HOG(histogram of gradient)梯度直方图提取图像的形状特征。HOG步骤如下：
+1. 计算每个像素的梯度的大小和方向
+2. 将这些像素分组为方形单元
+3. 计算每个单元格在某个方向范围内落下的梯度数
+将图像转成HOG特征后用机器学习(如SVM)的方法进行分类
+![hog](../img/CV/hog.png)
+![grad](../img/CV/grad2.png)
 
-## 车位拟合
+## 形状检测
+通过形状检测
 1.在直角坐标系下通过最小二乘法拟合
 2.在Hough空间拟合
-![sobel]
-![sobel]
-1calcualtes the magnitude and direction of the gradient at each pixel
-2groups these pixel into square cells
-3. counts how many gradients in each cell fall in a certain range of the orientations
-histogram of oriented gradient
+![rec0](../img/CV/rec0.png)
+![rec1](../img/CV/rec1.png)
+![fit](../img/CV/fit.png)

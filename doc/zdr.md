@@ -1,5 +1,5 @@
 # 张达睿
-18971195534  dalaska@126.com  github.com/dalaska  linkedin.com/in/daruizhang
+18971195534  dalaska@126.com  dalaska.github.io  linkedin.com/in/daruizhang
 
 ## 熟练技能
 Python, C++，Matlab, C, Linux
@@ -17,7 +17,7 @@ Python, C++，Matlab, C, Linux
 - 硕士，布法罗纽约州立大学（美国），机械工程专业                2011-2012
 - 学士，上海理工大学，机械设计制造和自动化专业                  2007-2011
 
-## 其他 （dalaska.github.io）
+## 其他
 - 发表论文：包括感知目标匹配，驾驶场景识别，雷达聚类，置信度模型, 驾驶员行为分类，交通大数据挖掘等9篇
 - 技术博客：培训并分享开发过程中的经验及总结如，深度学习，机器视觉，ADAS开发经验总结及自己开发的有用小工具。		                              
 
