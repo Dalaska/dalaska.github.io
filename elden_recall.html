@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>Elden Recall</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Caveat', cursive;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #0e1715;
+        }
+        h1 {
+            text-align: center;
+            color: #fadd4a;
+            width: 100%;
+            max-width: 500px;
+        }
+        #setup, #game {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+        }
+        textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #354142;
+            border-radius: 5px;
+            resize: vertical;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #fda533;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #69602c;
+        }
+        #status {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+        .died { background-color: #ff0000; color: #ffffff; }
+        .success { background-color: #B8860B; color: #ffffff; }
+    </style>
+</head>
+<body>
+
+<h1>ELDEN  RECALL</h1>
+
+<div id="setup">
+    <textarea id="memorizeText" rows="10" cols="50" placeholder="Inscribe the Lost Runes"></textarea><br>
+    <button id="startButton">Start New Game</button>
+</div>
+
+<div id="game" style="display:none;">
+    <textarea id="userInput" rows="10" cols="50" placeholder="Begin Recollecting"></textarea><br>
+    <p id="status"></p>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var memorizeTextArea = document.getElementById('memorizeText');
+    var startButton = document.getElementById('startButton');
+    var setupDiv = document.getElementById('setup');
+    var gameDiv = document.getElementById('game');
+    var userInputArea = document.getElementById('userInput');
+    var statusP = document.getElementById('status');
+
+    var memorizeLines = []; // 要背诵的文本行数组
+    var currentLineIndex = 0; // 当前行索引
+
+    // 点击开始按钮事件
+    startButton.addEventListener('click', function() {
+        var memorizeText = memorizeTextArea.value.trim();
+        if (memorizeText === '') {
+            alert('请输入要背诵的文本');
+            return;
+        }
+        memorizeLines = memorizeText.split('\n');
+        currentLineIndex = 0;
+        setupDiv.style.display = 'none';
+        gameDiv.style.display = 'block';
+        userInputArea.value = '';
+        userInputArea.focus();
+    });
+
+    // 监听用户输入区的键盘事件
+    userInputArea.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            // 等待换行符添加到值中
+            setTimeout(function() {
+                var userInputText = userInputArea.value;
+                var userLines = userInputText.split('\n');
+                var userCurrentLine = userLines[currentLineIndex] || '';
+                var memorizeCurrentLine = memorizeLines[currentLineIndex] || '';
+
+                if (userCurrentLine === memorizeCurrentLine) {
+                    currentLineIndex++;
+                    if (currentLineIndex === memorizeLines.length) {
+
+                    var godSlainMessage = document.createElement('div');
+                    godSlainMessage.textContent = "GOD SLAIN";
+                    godSlainMessage.style.cssText = `
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background-color: #0e1715;
+                        color: #B8860B;
+                        padding: 20px;
+                        font-size: 24px;
+                        font-weight: bold;
+                        border-radius: 10px;
+                        z-index: 1000;
+                    `;
+                    document.body.appendChild(godSlainMessage);
+
+
+                        setTimeout(function() {
+                    document.body.removeChild(godSlainMessage);
+                    
+                        // Reset the game
+                        alert('Lost Runes Recovered.');
+                        memorizeLines = [];
+                        currentLineIndex = 0;
+                        userInputArea.value = '';
+                        gameDiv.style.display = 'none';
+                        setupDiv.style.display = 'block';
+                        memorizeTextArea.value = '';
+                        memorizeTextArea.focus();
+                }, 500);
+                    }
+                } else {
+                    // Create a div element to display "you died" message
+                    var diedMessage = document.createElement('div');
+                    diedMessage.textContent = "YOU DIED";
+                    diedMessage.style.cssText = `
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background-color: #0e1715;
+                        color: #ff0000;
+                        padding: 20px;
+                        font-size: 24px;
+                        font-weight: bold;
+                        border-radius: 10px;
+                        z-index: 1000;
+                    `;
+                    document.body.appendChild(diedMessage);
+
+
+                    
+                // Remove the message and show popup after seconds
+                setTimeout(function() {
+                    document.body.removeChild(diedMessage);
+                    
+                    var prevLine = memorizeLines[currentLineIndex - 1] || '';
+                    var currentLine = memorizeLines[currentLineIndex];
+                    var nextLine = memorizeLines[currentLineIndex + 1] || '';
+
+                    var message = 'The True Script:\n';
+                    if (currentLineIndex > 0) {
+                        message +=  prevLine + '\n';
+                    }
+                    message +=  currentLine + '\n';
+                    if (currentLineIndex + 1 < memorizeLines.length) {
+                        message +=  nextLine + '\n';
+                    }
+
+                    alert(message);
+
+                    // 重置用户输入和当前行索引
+                    userInputArea.value = '';
+                    currentLineIndex = 0;
+                    userInputArea.focus();
+                }, 500);
+                            }
+            }, 0);
+        }
+    });
+});
+</script>
+
+</body>
+</html>
